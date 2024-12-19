@@ -1,0 +1,64 @@
+<mujoco model="aliengo scene">
+
+  <include file="aliengo_arm_leader_named.xml" />
+  <include file="aliengo_arm_follower_named.xml" />
+  <include file="weight.xml" />
+  
+
+  <statistic center="0 0 0.1" extent="0.8" />
+  
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="-130" elevation="-20" />
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2" />
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" />
+  
+    <geom pos="3 0.0 0.32499999999999996" type="box" size="10 2 0.025" quat="1.0 0.0 -0.1 0.0" rgba="0.2 0.2 0.2 1" contype="1" conaffinity="0" />
+     <!-- <geom pos="4.0 0.0 0.06851457463958638" type="box" size="2.5 2.5 0.05925728731979319" quat="1.0 0.0 0.0 0.0" /><geom pos="4.0 0.0 0.18702914927917275" type="box" size="2.1214786520307696 2.1214786520307696 0.05925728731979319" quat="1.0 0.0 0.0 0.0" /><geom pos="4.0 0.0 0.3055437239187591" type="box" size="1.7429573040615387 1.7429573040615387 0.05925728731979319" quat="1.0 0.0 0.0 0.0" /><geom pos="4.0 0.0 0.4240582985583455" type="box" size="1.364435956092308 1.364435956092308 0.05925728731979319" quat="1.0 0.0 0.0 0.0" /><geom pos="4.0 0.0 0.5425728731979319" type="box" size="0.9859146081230774 0.9859146081230774 0.05925728731979319" quat="1.0 0.0 0.0 0.0" /></worldbody> -->
+  </worldbody>
+
+    <!-- <tendon>
+    <spatial name="link_arms2" limited="true" range="0 0.8" width="0.01" stiffness="5">
+      
+      <site site="follower/eef_contact" />
+      <site site="leader/eef_leader" />
+    </spatial>
+  </tendon>         -->
+
+    <!-- <tendon>
+    <spatial name="link_arms2" limited="true" range="0 0.8" width="0.01" stiffness="5">
+      
+      <site site="mount_pooint_1" />
+      <site site="follower/eef_contact" />
+    </spatial>
+  </tendon>         -->
+    <tendon>
+    <spatial name="link_arms1" limited="true" range="0 0.15" width="0.01" stiffness="15">
+      
+      <site site="mount_pooint_2" />
+      <site site="follower/eef_contact" />
+    </spatial>
+    <spatial name="link_arms2" limited="true" range="0 0.15" width="0.01" stiffness="15">
+      
+      <site site="mount_pooint_1" />
+      <site site="leader/eef_leader" />
+    </spatial>
+  </tendon>      
+    <keyframe>
+        
+        <key name="leader_home" qpos="0.8 0 0.35 1 0 0 0 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0 0. 0.8                                                                              
+        -1.2 0  0.35 1 0 0 0 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0 0. 0.8
+        0 0 0.35 1 0 0 0                                                                                                                              " ctrl="0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0 0 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0 0                      " />
+        
+    </keyframe>
+</mujoco>
