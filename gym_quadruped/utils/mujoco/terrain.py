@@ -3,7 +3,7 @@ from __future__ import annotations
 import xml.etree.ElementTree as xml_et
 
 import numpy as np
-import cv2
+# import cv2
 import noise
 from pathlib import Path
 from typing import List
@@ -78,7 +78,7 @@ def add_perlin_heightfield(
                                         lacunarity=perlin_lacunarity)
             terrain_image[y, x] = int((noise_value + 1) / 2 * 255)
 
-    cv2.imwrite(str(file_path.resolve()), terrain_image)
+    # cv2.imwrite(str(file_path.resolve()), terrain_image)
 
     hfield = xml_et.SubElement(asset, "hfield")
     hfield.attrib["name"] = "perlin_hfield"

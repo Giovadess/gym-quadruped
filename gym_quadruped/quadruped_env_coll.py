@@ -20,7 +20,7 @@ from gym_quadruped.utils.math_utils import homogenous_transform
 from gym_quadruped.utils.mujoco.visual import change_robot_appearance, render_ghost_robot, render_vector, render_sphere
 from gym_quadruped.utils.quadruped_utils_collab import LegsAttrTwoRbots, extract_mj_joint_info
 
-from gym_quadruped.utils.mujoco.terrain import add_world_of_boxes, add_world_of_pyramid
+# from gym_quadruped.utils.mujoco.terrain import add_world_of_boxes, add_world_of_pyramid
 
 BASE_OBS = ['base_pos', 'base_lin_vel', 'base_ang_vel', 'base_ori_euler_xyz', 'base_ori_quat_wxyz', 'base_ori_SO3']
 GEN_COORDS_OBS = ['qpos', 'qvel', 'tau_ctrl_setpoint', 'qpos_js', 'qvel_js']
@@ -112,14 +112,14 @@ class QuadrupedEnvColl(gym.Env):
         # Random terrain generation
         if scene == 'random_boxes' or scene == 'random_pyramids':
             model_file_path = base_path / f'scene_two_robots.xml'
-            if scene == 'random_boxes':
-                scene_env, self.terrain_radius, self.terrain_center = add_world_of_boxes(model_file_path,
-                                                                                        init_pos=[1, -1.5, 0.02],
-                                                                                        euler=[0, 0, 0.0],
-                                                                                        nums=[10, 10],
-                                                                                        separation=[0.5, 0.5])
-            else:
-                scene_env, self.terrain_radius, self.terrain_center = add_world_of_pyramid(model_file_path, init_pos=[4, 0, 0.02])
+            # if scene == 'random_boxes':
+            #     scene_env, self.terrain_radius, self.terrain_center = add_world_of_boxes(model_file_path,
+            #                                                                             init_pos=[1, -1.5, 0.02],
+            #                                                                             euler=[0, 0, 0.0],
+            #                                                                             nums=[10, 10],
+            #                                                                             separation=[0.5, 0.5])
+            # else:
+            #     scene_env, self.terrain_radius, self.terrain_center = add_world_of_pyramid(model_file_path, init_pos=[4, 0, 0.02])
             
             model_file_path = base_path / f'scene_two_robots.xml'
             scene_env.write(model_file_path)
@@ -978,24 +978,6 @@ class QuadrupedEnvColl(gym.Env):
         qpos2=self.mjData.qpos[23:]
         return qpos2[0:3]
 
-    # @property
-    # def base_lin_vel_leader(self):
-    #     """Returns the base linear velocity (3,) in the world reference frame."""
-    #     return self.mjData.qvel[0:3]
-    # @property
-    # def base_lin_vel_follower(self):
-    #     """Returns the base linear velocity (3,) in the world reference frame."""
-    #     qvel2=self.mjData.qvel[21:]
-    #     return qvel2[0:3]
-    # @property
-    # def base_ang_vel(self):
-    #     """Returns the base angular velocity (3,) in the world reference frame."""
-    #     return self.mjData.qvel[3:6]
-    # @property
-    # def base_ang_vel_follower(self):
-    #     """Returns the base angular velocity (3,) in the world reference frame."""
-    #     qvel2=self.mjData.qvel[21:]
-    #     return qvel2[3:6]
     @property
     def base_ori_euler_xyz(self):
         """Returns the base orientation in Euler XYZ angles (roll, pitch, yaw) in the world reference frame."""
@@ -1297,9 +1279,9 @@ class QuadrupedEnvColl(gym.Env):
             self._ref_base_lin_vel_H[0] += 0.25 * self.hip_height  # % of (hip_height / second)
         elif keycode == 264:  # arrow down
             self._ref_base_lin_vel_H[0] -= 0.25 * self.hip_height  # % of (hip_height / second)
-        elif keycode == 340:  # ctrl
+        elif keycode == 345:  # ctrl
             self._ref_base_lin_vel_H *= 0.0
-            self._ref_base_lin_vel_H[0]=0.0
+            self._ref_base_ang_yaw_dot = 0.0
             
             self._ref_base_ang_yaw_dot = 0.0
 

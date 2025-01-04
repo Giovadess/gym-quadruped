@@ -1,7 +1,8 @@
 <mujoco model="aliengo scene">
 
-  <include file="aliengo_arm_leader_named.xml"/>
-  <include file="aliengo_arm_follower_named.xml"/>
+  <include file="aliengo_arm_leader_named.xml" />
+  <include file="aliengo_arm_follower_named.xml" />
+  <include file="weight.xml" />
 
   <statistic center="0 0 0.1" extent="0.8"/>
   

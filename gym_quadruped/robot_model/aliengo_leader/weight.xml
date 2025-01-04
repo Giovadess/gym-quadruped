@@ -34,7 +34,7 @@
     <worldbody>
         <light directional="true" diffuse=".8 .8 .8" pos="0 0 10" dir="0 0 -10"/>
         <body name="mountpoint" pos="0 0 0.5">
-        <inertial pos="0.022191 -0.015144 -1.5e-05" quat="-0.0117635 0.707151 0.0135493 0.706835" mass="5" diaginertia="0.00558695 0.00491009 0.00290132" />
+        <inertial pos="0.022191 -0.015144 -1.5e-05" quat="-0.0117635 0.707151 0.0135493 0.706835" mass="2" diaginertia="0.00558695 0.00491009 0.00290132" />
 
             <joint name='weight_joint' type="free" />
             <geom type="cylinder" size="0.1 0.01 0.01" quat="1 0 0 0" rgba="0 0 0 1"/>

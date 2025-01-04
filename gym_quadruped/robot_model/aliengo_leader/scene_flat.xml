@@ -1,5 +1,6 @@
 <mujoco model="aliengo scene">
   <include file="aliengo_arm_leader.xml"/>
+  <!-- <include file="weight.xml"/> -->
   <!-- <include file="aliengo_arm_leader_named.xml"/> -->
     <!-- <include file="aliengo_arm_follower_named.xml"/> -->
 
@@ -59,4 +60,11 @@
         ctrl="0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0 0
               "/>
     </keyframe> -->
+    <!-- <tendon>
+    <spatial name="link_arms2" limited="true" range="0 1" width="0.01" stiffness="20">
+      <site site="eef_leader" />
+      <site site="mount_pooint_1" />
+    </spatial>
+  </tendon>   -->
+
 </mujoco>

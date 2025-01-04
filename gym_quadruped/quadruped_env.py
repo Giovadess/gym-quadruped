@@ -467,11 +467,8 @@ class QuadrupedEnv(gym.Env):
         R_B_heading = self.heading_orientation_SO3
         ref_base_lin_vel = (R_B_heading @ self._ref_base_lin_vel_H.reshape(3, 1)).squeeze()
         ref_base_ang_vel = np.array([0., 0., self._ref_base_ang_yaw_dot])
-        if frame == 'world':
-            return ref_base_lin_vel, ref_base_ang_vel
-        elif frame == 'base':
-            R = self.base_configuration[0:3, 0:3]
-            return R.T @ ref_base_lin_vel, R.T @ ref_base_ang_vel
+        return ref_base_lin_vel, ref_base_ang_vel
+
 
     def base_lin_vel(self, frame='world'):
         """Returns the base linear velocity (3,) in the specified frame."""
@@ -556,10 +553,23 @@ class QuadrupedEnv(gym.Env):
         else:
             raise ValueError(f"Invalid frame: {frame} != 'world' or 'base'")
         # TODO: Name of bodies should not be hardcodd
-        FL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'FL_hip')
-        FR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'FR_hip')
-        RL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'RL_hip')
-        RR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'RR_hip')
+        # added work around for leader and follower shall add a better way to do this by passing a list of names for the hips in the initializations
+        if self.robot_name=="aliengo_leader":
+            FL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'leader/FL_hip')
+            FR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'leader/FR_hip')
+            RL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'leader/RL_hip')
+            RR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'leader/RR_hip')
+        elif self.robot_name=="aliengo_follower":
+            FL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'follower/FL_hip')
+            FR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'follower/FR_hip')
+            RL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'follower/RL_hip')
+            RR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'follower/RR_hip')
+        else:
+            FL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'FL_hip')
+            FR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'FR_hip')
+            RL_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'RL_hip')
+            RR_hip_id = mujoco.mj_name2id(self.mjModel, mujoco.mjtObj.mjOBJ_BODY, 'RR_hip')
+        
         return LegsAttr(
             FR=R.T @ self.mjData.body(FR_hip_id).xpos,
             FL=R.T @ self.mjData.body(FL_hip_id).xpos,
@@ -873,7 +883,13 @@ class QuadrupedEnv(gym.Env):
         obs_reps = configure_observation_space_representations(robot_name=self.robot_name,
                                                                obs_names=self.state_obs_names)
         return obs_reps
-
+    @property
+    def end_effector_pos_leader(self):
+        """Returns the end effector position of the leader arm."""
+        # end_effector_pos=self.mjData.site_xpos("eef_leader")
+        end_effector_pos=self.mjData.site('eef_leader').xpos
+        # sens_pos=np.array(self.d.site('eef_follower').xpos)
+        return end_effector_pos
     def extract_obs_from_state(self, state_like_array: np.ndarray) -> dict[str, np.ndarray]:
         """Extracts the state observation from a state-like array.
 
