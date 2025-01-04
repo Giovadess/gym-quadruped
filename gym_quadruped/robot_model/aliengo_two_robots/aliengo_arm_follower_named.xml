@@ -260,50 +260,19 @@
 
 
     </worldbody>
-    <!-- <contact>
-        <pair geom1="second/arm_link_2_link" geom2="massgeom"/>
-    </contact> -->
-
-    <!-- <tendon>
-        <spatial name="link_arms" limited="false" range="0 0.8" width="0.005" stiffness="10" >
-          <site site="eef_contact_follower"/>
-          <site site="mount_pooint"/>
-        </spatial>
-    </tendon> -->
-
-    <!-- <body name="box_link" >
-        <geom type="box" size="0.1 0.1 0.1" rgba="0.8 0.8 0.8 1"/>
-    </body> -->
-
-    <!-- <equality>
-      <connect anchor="-1.5 0 0" body1="arm_link_2" body2="second/arm_link_2" />
-    </equality> -->
-    
-    <!-- <equality>
-        <weld body1="second/arm_link_2" body2="mountpoint" relpose="0.1 0 -0.25 1 0 0 0" />
-    </equality> -->
     <actuator>       
-        
-        <motor name="follower/FR_hip"       gear="1" group="0" joint="follower/FR_hip_joint"/>
-        <motor name="follower/FR_thigh"     gear="1" group="0" joint="follower/FR_thigh_joint"/>
-        <motor name="follower/FR_calf"      gear="1" group="0" joint="follower/FR_calf_joint"/>
-        <motor name="follower/FL_hip"       gear="1" group="0" joint="follower/FL_hip_joint"/>
-        <motor name="follower/FL_thigh"     gear="1" group="0" joint="follower/FL_thigh_joint"/>
-        <motor name="follower/FL_calf"      gear="1" group="0" joint="follower/FL_calf_joint"/>
-        <motor name="follower/RR_hip"       gear="1" group="0" joint="follower/RR_hip_joint"/>
-        <motor name="follower/RR_thigh"     gear="1" group="0" joint="follower/RR_thigh_joint"/>
-        <motor name="follower/RR_calf"      gear="1" group="0" joint="follower/RR_calf_joint" />
-        <motor name="follower/RL_hip"       gear="1" group="0" joint="follower/RL_hip_joint"/>
-        <motor name="follower/RL_thigh"     gear="1" group="0" joint="follower/RL_thigh_joint"/>
-        <motor name="follower/RL_calf"      gear="1" group="0" joint="follower/RL_calf_joint"/>
-        <motor name="follower/arm_link_1"   gear="1" group="1" joint="follower/arm_link_1_joint"/>
-        <motor name="follower/arm_link_2"   gear="1" group="1" joint="follower/arm_link_2_joint"/>
-        <motor name="follower/arm_link_3"   gear="1" group="1" joint="follower/arm_link_3_joint"/>
-        <!-- second robot-->
-
-
-
-        <!-- <motor name="second/arm_link_3_joint_sensorcad"      gear="1" joint="second/arm_link_3_joint"/> -->
+        <motor name="follower/FR_hip"   class="follower/hip"    gear="1" joint="follower/FR_hip_joint"/>
+        <motor name="follower/FR_thigh" class="follower/thigh"  gear="1" joint="follower/FR_thigh_joint"/>
+        <motor name="follower/FR_calf"  class="follower/calf"   gear="1" joint="follower/FR_calf_joint"/>
+        <motor name="follower/FL_hip"   class="follower/hip"    gear="1" joint="follower/FL_hip_joint"/>
+        <motor name="follower/FL_thigh" class="follower/thigh"  gear="1" joint="follower/FL_thigh_joint"/>
+        <motor name="follower/FL_calf"  class="follower/calf"   gear="1" joint="follower/FL_calf_joint"/>
+        <motor name="follower/RR_hip"   class="follower/hip"    gear="1" joint="follower/RR_hip_joint"/>
+        <motor name="follower/RR_thigh" class="follower/thigh"  gear="1" joint="follower/RR_thigh_joint"/>
+        <motor name="follower/RR_calf"  class="follower/calf"   gear="1" joint="follower/RR_calf_joint" />
+        <motor name="follower/RL_hip"   class="follower/hip"    gear="1" joint="follower/RL_hip_joint"/>
+        <motor name="follower/RL_thigh" class="follower/thigh"  gear="1" joint="follower/RL_thigh_joint"/>
+        <motor name="follower/RL_calf"  class="follower/calf"   gear="1" joint="follower/RL_calf_joint"/>
     </actuator>
 
     <sensor>
