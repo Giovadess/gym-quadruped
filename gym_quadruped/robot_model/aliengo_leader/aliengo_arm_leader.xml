@@ -32,13 +32,13 @@
         </default> 
 
         <default class="leader/hip">
-            <motor ctrlrange="-44.4 44.4"/>
+            <motor ctrlrange="-100.4 100.4"/>
         </default>
         <default class="leader/thigh">
-            <motor ctrlrange="-35.278 35.278"/>
+            <motor ctrlrange="-100.278 100.278"/>
         </default>
         <default class="leader/calf">
-            <motor ctrlrange="-35.278 35.278"/>
+            <motor ctrlrange="-100.278 100.278"/>
         </default>
 
     </default>
@@ -215,22 +215,22 @@
 
                     <body name="leader/arm_link_0" pos="0 0 0.06" quat="0 0 0 1">
                         <inertial pos="0. 0 0." quat="0 0 0 1" mass="0.5" diaginertia="0.000004622 0.000004495 0.000002079" />
-                        <joint name="leader/arm_link_1_joint" pos="0. 0 0." axis="0 0 1" limited="true" range="-1 1"  stiffness="10"
-                        damping="1" />
+                        <joint name="leader/arm_link_1_joint" pos="0. 0 0." axis="0 0 1" limited="true" range="-1 1"  stiffness="100"
+                        damping="0.00004" />
                         <geom type="mesh" contype="0" conaffinity="0" group="2" rgba="0.2 0.2 0.2 1" mesh="leader/arm_link_1" />
                         
                         <body name="leader/arm_link_1" pos="0.05 0 0.035 ">
                             <inertial pos="0.0194 0.0 -0.125" quat="0 0 0 1" mass="0.5" diaginertia="0.00000457 0.000004831 0.000001409" />
-                            <joint name="leader/arm_link_2_joint" pos="0.01 0 0.0" axis="0 1 0" limited="true" range="-1 1" stiffness="10"
-                            damping="1" />
+                            <joint name="leader/arm_link_2_joint" pos="0.01 0 0.0" axis="0 1 0" limited="false" range="-1 1" stiffness="20"
+                            damping="0.0001" />
                             <geom type="mesh" contype="0" conaffinity="0" group="2" rgba="0.2 0.2 0.2 1" mesh="leader/arm_link_2" />
                             <geom size="0.04 0.0002 0.1" pos="0. 0 0" quat="0 0 0 1" type="capsule" rgba="0.2 0.2 0.2 0" />
 
                             <body name="leader/arm_link_2" pos="0.18 0.0 0.185" quat="1 0. 0 0">
                                 <inertial pos="0.0388 0.0 -0.25" quat="1 0 0 0" mass="0.220" diaginertia="0.000011088 0.00001072 0.000011255" />
 
-                                <joint name="leader/arm_link_3_joint" pos="0. 0 0" axis="0 1 0" limited="false" range="-1 0.2" stiffness="10"
-                                damping="1" />
+                                <joint name="leader/arm_link_3_joint" pos="0. 0 0" axis="0 1 0" limited="false" range="-1 0.2" stiffness="20"
+                                damping="2.7" />
                                 <geom name="leader/apply_force_frame" type="mesh" contype="0" conaffinity="0" group="2" rgba="0 0 0 1" mesh="leader/arm_link_3" />
                                 <geom size="0.03 0.03 0.15" pos="0.02 0 -0.15" quat="0 0 1 1" type="box" rgba="0 0 0 0" />
 
@@ -239,8 +239,8 @@
                             
                             
                                 <body name="leader/eef" pos="0.04 0 -0.25" quat="1 0 0 0">
-                                    <inertial pos="0 0 0" mass="0.1" diaginertia="0.00001 0.00001 0.00001"/>
-                                    <joint name="leader/eef_joint"  damping="0.1"/>
+                                    <inertial pos="0 0 0" mass="5" diaginertia="0.00001 0.00001 0.00001"/>
+                                    <joint name="leader/eef_joint"  damping="0.00001"/>
                                     <geom name="leader/eef_geom" type="sphere" size="0.02" rgba="0 1 0 1" contype="0" conaffinity="0"/>
                                     <site name="leader/eef_contact" pos="0 0 0" size="0.01" rgba="1 0 0 1"/>
                                 </body>
@@ -316,7 +316,7 @@
 
     <!--this defines the initial position of the robot-->
     <keyframe>
-        <key name="home" qpos="0. 0 0.35  1 0 0 0 
+        <key name="home" qpos="0 0 0.35  1 0 0 0 
         0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0.9 -1.8 0 0 0. 0.4
                                
                              "
